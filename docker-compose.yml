@@ -1,0 +1,19 @@
+services:
+  api:
+    restart: unless-stopped
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+      target: dev
+    command: npm run start:dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - 8000:8000
+    networks:
+      - api-network
+
+networks:
+  api-network:
+    driver: bridge
